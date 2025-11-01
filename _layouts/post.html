@@ -1,0 +1,67 @@
+---
+layout: default
+---
+<section class="newsletter-post">
+    <div class="container">
+        <!-- Hero Section -->
+        {% if page.hero_image %}
+        <div class="post-hero">
+            <img src="{{ page.hero_image | relative_url }}" alt="{{ page.title }}" />
+        </div>
+        {% endif %}
+
+        <!-- Post Header -->
+        <header class="post-header">
+            <h1 class="post-title">{{ page.title }}</h1>
+            <div class="post-meta">
+                <span class="post-date">
+                    <i class="far fa-calendar"></i> {{ page.date | date: "%B %d, %Y" }}
+                </span>
+                <span class="post-author">
+                    <i class="far fa-user"></i> {{ page.author | default: site.defaults[0].values.author }}
+                </span>
+                {% if page.category %}
+                <span class="post-category color-bg-blue-0015">
+                    {{ page.category }}
+                </span>
+                {% endif %}
+            </div>
+            {% if page.excerpt %}
+            <div class="post-excerpt">
+                {{ page.excerpt }}
+            </div>
+            {% endif %}
+        </header>
+
+        <!-- Post Content -->
+        <article class="post-content">
+            {{ content }}
+        </article>
+
+        <!-- Call to Action -->
+        <div class="post-cta color-bg-blue-0050">
+            <h3>Join 10,000+ Educators</h3>
+            <p>Get weekly systems thinking insights, NGSS resources, and classroom strategies delivered every Sunday.</p>
+            <div class="subscribe-form">
+                <form action="https://discoverycollective.us11.list-manage.com/subscribe/post" method="POST" target="_blank">
+                    <input type="email" name="EMAIL" placeholder="your.email@school.edu" required />
+                    <button type="submit" class="color-bg-blue-0015">Subscribe Free</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="post-navigation">
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}" class="prev-post">
+                <i class="fas fa-arrow-left"></i> Previous: {{ page.previous.title }}
+            </a>
+            {% endif %}
+            {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}" class="next-post">
+                Next: {{ page.next.title }} <i class="fas fa-arrow-right"></i>
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+</section>

@@ -1,0 +1,38 @@
+# ModelIt! K12 Newsletter - Weekly Systems Thinking Insights
+title: "The Systems Thinker's Weekly"
+description: "Weekly insights on systems modeling, NGSS alignment, and educational innovation from ModelIt! K12"
+url: "https://charlesmartinedd.github.io"
+baseurl: "/modelitk12-newsletter"
+
+# Build settings
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /newsletter/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Dr. Marie & Charles Martin"
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Theme settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

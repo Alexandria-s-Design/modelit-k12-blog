@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}The Systems Thinker's Weekly</title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header color-bg-blue-0005">
+        <nav class="nav-left">
+            <div class="logo">
+                <a href="https://charlesmartinedd.github.io/modelitk12/">
+                    <img src="{{ '/assets/images/modelit-logo.png' | relative_url }}" alt="ModelIt! Logo" />
+                </a>
+            </div>
+            <ul class="menu">
+                <li><a href="{{ '/' | relative_url }}">Newsletter Home</a></li>
+                <li><a href="https://charlesmartinedd.github.io/modelitk12/">ModelIt! Website</a></li>
+                <li><a href="https://charlesmartinedd.github.io/modelitk12/#/publications">Research</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="page-container">
+        {{ content }}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer color-bg-blue-0005">
+        <div class="container">
+            <div class="company">
+                <div class="footer-logo">
+                    <img src="{{ '/assets/images/modelit-logo.png' | relative_url }}" alt="ModelIt! Logo" />
+                </div>
+                <div class="footer-contact">
+                    <p><strong>The Systems Thinker's Weekly</strong></p>
+                    <p>Weekly insights from ModelIt! K12</p>
+                    <p><a href="mailto:info@discoverycollective.com">info@discoverycollective.com</a></p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://twitter.com/ModelitEduc" class="fa-icon" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/modelit" class="fa-icon" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="roadmap">
+                <div class="grid">
+                    <div class="grid-column">
+                        <h3>Newsletter</h3>
+                        <ul>
+                            <li><a href="{{ '/' | relative_url }}">Latest Issues</a></li>
+                            <li><a href="#subscribe">Subscribe</a></li>
+                            <li><a href="{{ '/archive' | relative_url }}">Archive</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="https://charlesmartinedd.github.io/modelitk12/">ModelIt! Home</a></li>
+                            <li><a href="https://charlesmartinedd.github.io/modelitk12/#/learning-hub">Learning Hub</a></li>
+                            <li><a href="https://www.teacherspayteachers.com/Store/Modelit-K12">Teachers Pay Teachers</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid-column">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="https://charlesmartinedd.github.io/modelitk12/#/publications">Publications</a></li>
+                            <li><a href="https://cellcollective.org">Cell Collective</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Alexandria's Design | ModelIt! K12</p>
+                <p>Powered by Cell Collective & Systems Thinking Education</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
