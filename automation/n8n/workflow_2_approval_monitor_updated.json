@@ -1,0 +1,318 @@
+{
+  "name": "ModelIt Blog - Approval Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "name": "Every 15 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "mondayApi",
+        "operation": "getItems",
+        "boardId": "18371710717",
+        "returnAll": true
+      },
+      "name": "Get Blog Pipeline Items",
+      "type": "n8n-nodes-base.mondayDotCom",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "mondayApi": {
+          "id": "1",
+          "name": "ModelIt Monday.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.column_values.find(col => col.id === 'color_mkxjmjnc').text}}",
+              "operation": "equals",
+              "value2": "Approved"
+            }
+          ]
+        }
+      },
+      "name": "Filter: Status = Approved",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/charlesmartinedd/modelitk12-newsletter/dispatches",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "event_type",
+              "value": "publish_blog"
+            },
+            {
+              "name": "client_payload",
+              "value": "={{JSON.stringify({item_id: $json.id, week: $json.name})}}"
+            }
+          ]
+        }
+      },
+      "name": "Trigger GitHub Publish",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "minutes"
+      },
+      "name": "Wait for GitHub Pages Build",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        200
+      ],
+      "webhookId": "modelit-wait"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ \n  {\n    id: $json.id,\n    name: $json.name,\n    filename: $json.column_values.find(col => col.id === 'text_mkxjb0jw')?.text || '',\n    blogUrl: 'https://charlesmartinedd.github.io/modelitk12-newsletter/' + \n             ($json.column_values.find(col => col.id === 'text_mkxjb0jw')?.text || '').replace('.md', '.html').replace('_posts/', '').replace(/^(\\d{4})-(\\d{2})-(\\d{2})-/, '$1/$2/$3/')\n  }\n}}"
+      },
+      "name": "Construct Blog URL",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "mondayApi",
+        "operation": "updateColumnValue",
+        "boardId": "18371710717",
+        "itemId": "={{$json.id}}",
+        "columnId": "link_mkxk7wqr",
+        "value": "={\"url\": \"" + $json.blogUrl + "\", \"text\": \"View Published Post\"}"
+      },
+      "name": "Add URL to Monday.com",
+      "type": "n8n-nodes-base.mondayDotCom",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        200
+      ],
+      "credentials": {
+        "mondayApi": {
+          "id": "1",
+          "name": "ModelIt Monday.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://app.ayrshare.com/api/post",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"post\": \"🔬 NEW BLOG: \" + $json.name + \"\\n\\nRead more: \" + $json.blogUrl + \"\\n\\n#ModelItK12 #ScienceEducation #NGSS\", \"platforms\": [\"facebook\", \"linkedin\", \"twitter\"], \"tags\": {\"project\": \"modelit_k12\", \"week\": $json.column_values.find(col => col.id === 'numeric_mkxje89w').text}}"
+      },
+      "name": "Post to Social Media",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1250,
+        400
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3",
+          "name": "Ayrshare API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "mondayApi",
+        "operation": "updateColumnValue",
+        "boardId": "18371710717",
+        "itemId": "={{$json.id}}",
+        "columnId": "color_mkxjmjnc",
+        "value": "{\"label\": \"Published\"}"
+      },
+      "name": "Update Status to Published",
+      "type": "n8n-nodes-base.mondayDotCom",
+      "typeVersion": 1,
+      "position": [
+        1650,
+        300
+      ],
+      "credentials": {
+        "mondayApi": {
+          "id": "1",
+          "name": "ModelIt Monday.com"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Blog Pipeline Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Blog Pipeline Items": {
+      "main": [
+        [
+          {
+            "node": "Filter: Status = Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter: Status = Approved": {
+      "main": [
+        [
+          {
+            "node": "Trigger GitHub Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger GitHub Publish": {
+      "main": [
+        [
+          {
+            "node": "Wait for GitHub Pages Build",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for GitHub Pages Build": {
+      "main": [
+        [
+          {
+            "node": "Construct Blog URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construct Blog URL": {
+      "main": [
+        [
+          {
+            "node": "Add URL to Monday.com",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Post to Social Media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add URL to Monday.com": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Social Media": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "saveDataSuccessExecution": "all"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-10T02:51:00.000Z",
+  "versionId": "2"
+}

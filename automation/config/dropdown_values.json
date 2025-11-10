@@ -1,0 +1,275 @@
+{
+  "project_dropdown": {
+    "description": "Which project this content belongs to",
+    "values": [
+      {
+        "label": "ModelIt K12",
+        "color": "#0F6ACE",
+        "description": "K-12 educational platform content"
+      },
+      {
+        "label": "Cell Collective",
+        "color": "#030C3C",
+        "description": "University research platform content"
+      },
+      {
+        "label": "Alexandria's Design",
+        "color": "#38aefd",
+        "description": "Parent company/general content"
+      }
+    ]
+  },
+
+  "category_dropdown": {
+    "description": "Content category for blog posts",
+    "values": [
+      {
+        "label": "Platform Features",
+        "color": "#0F6ACE",
+        "description": "Deep dives into ModelIt features, tools, and capabilities"
+      },
+      {
+        "label": "Behind the Science",
+        "color": "#9D66D9",
+        "description": "Cell Collective research, Dr. Helikar's work, scientific discoveries"
+      },
+      {
+        "label": "NGSS Standards",
+        "color": "#00C875",
+        "description": "Standards alignment, assessment strategies, curriculum mapping"
+      },
+      {
+        "label": "Teacher Stories",
+        "color": "#FFCB00",
+        "description": "Classroom success stories, teacher spotlights, real implementations"
+      },
+      {
+        "label": "Getting Started",
+        "color": "#579BFC",
+        "description": "Onboarding guides, quick start tutorials, beginner tips"
+      },
+      {
+        "label": "Professional Development",
+        "color": "#CAB641",
+        "description": "Teacher training, certification programs, workshops"
+      }
+    ]
+  },
+
+  "platform_dropdown": {
+    "description": "Social media platforms for distribution",
+    "values": [
+      {
+        "label": "Facebook",
+        "enabled": true,
+        "post_time": "08:00",
+        "character_limit": null,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "moderate (3-5)"
+      },
+      {
+        "label": "LinkedIn",
+        "enabled": true,
+        "post_time": "09:00",
+        "character_limit": 3000,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "light (2-3)"
+      },
+      {
+        "label": "X (Twitter)",
+        "enabled": true,
+        "post_time": "10:00",
+        "character_limit": 280,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "heavy (5-8)"
+      },
+      {
+        "label": "Instagram",
+        "enabled": false,
+        "post_time": "11:00",
+        "character_limit": 2200,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "heavy (10-15)",
+        "note": "Requires square images (1:1 ratio)"
+      },
+      {
+        "label": "Pinterest",
+        "enabled": false,
+        "post_time": "12:00",
+        "character_limit": 500,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "heavy (10-15)",
+        "note": "Best for infographics and visual guides"
+      },
+      {
+        "label": "Bluesky",
+        "enabled": false,
+        "post_time": "13:00",
+        "character_limit": 300,
+        "supports_images": true,
+        "supports_video": false,
+        "hashtag_strategy": "moderate (3-5)"
+      },
+      {
+        "label": "Reddit",
+        "enabled": false,
+        "post_time": "14:00",
+        "character_limit": 40000,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "none",
+        "note": "Requires subreddit targeting: r/Teachers, r/ScienceTeachers"
+      },
+      {
+        "label": "Snapchat",
+        "enabled": false,
+        "post_time": "15:00",
+        "supports_images": true,
+        "supports_video": true,
+        "note": "24-hour stories only"
+      },
+      {
+        "label": "Threads",
+        "enabled": false,
+        "post_time": "16:00",
+        "character_limit": 500,
+        "supports_images": true,
+        "supports_video": true,
+        "hashtag_strategy": "light (2-3)"
+      },
+      {
+        "label": "TikTok",
+        "enabled": false,
+        "post_time": "17:00",
+        "supports_images": false,
+        "supports_video": true,
+        "hashtag_strategy": "heavy (5-10)",
+        "note": "Video content only, 15-60 seconds"
+      },
+      {
+        "label": "YouTube",
+        "enabled": false,
+        "post_time": "18:00",
+        "supports_images": false,
+        "supports_video": true,
+        "note": "Long-form video content, requires YouTube channel"
+      },
+      {
+        "label": "Google Business Profile",
+        "enabled": false,
+        "post_time": "19:00",
+        "character_limit": 1500,
+        "supports_images": true,
+        "supports_video": true,
+        "note": "For local business presence"
+      }
+    ]
+  },
+
+  "post_type_dropdown": {
+    "description": "Type of social media post",
+    "values": [
+      {
+        "label": "Blog Announcement",
+        "description": "Announcing new blog post with link"
+      },
+      {
+        "label": "Featured Content",
+        "description": "Highlighting specific feature or capability"
+      },
+      {
+        "label": "Weekly Tip",
+        "description": "Quick teaching tip or classroom strategy"
+      },
+      {
+        "label": "Student Spotlight",
+        "description": "Showcasing student work or success story"
+      },
+      {
+        "label": "Research Highlight",
+        "description": "Sharing Cell Collective research or publication"
+      },
+      {
+        "label": "Event Promotion",
+        "description": "Webinar, workshop, or training announcement"
+      },
+      {
+        "label": "Community Engagement",
+        "description": "Question, poll, or discussion starter"
+      }
+    ]
+  },
+
+  "status_labels": {
+    "blog_content_pipeline": {
+      "board_id": "18371710717",
+      "column_id": "color_mkxjmjnc",
+      "values": [
+        {
+          "label": "Draft",
+          "color": "#c4c4c4",
+          "description": "Content generated, awaiting review"
+        },
+        {
+          "label": "Review",
+          "color": "#FDAB3D",
+          "description": "Under review by content creator"
+        },
+        {
+          "label": "Approved",
+          "color": "#00C875",
+          "description": "Ready for publishing - automation will publish"
+        },
+        {
+          "label": "Published",
+          "color": "#0F6ACE",
+          "description": "Live on blog and shared to social media"
+        },
+        {
+          "label": "On Hold",
+          "color": "#FF6B6B",
+          "description": "Paused - needs revisions or delayed"
+        }
+      ]
+    },
+
+    "social_media_schedule": {
+      "board_id": "18371710865",
+      "column_id": "color_mkxjffpg",
+      "values": [
+        {
+          "label": "Scheduled",
+          "color": "#FDAB3D",
+          "description": "Queued in Ayrshare for posting"
+        },
+        {
+          "label": "Posted",
+          "color": "#00C875",
+          "description": "Successfully posted to platform"
+        },
+        {
+          "label": "Analytics Collected",
+          "color": "#0F6ACE",
+          "description": "Performance metrics retrieved"
+        },
+        {
+          "label": "Failed",
+          "color": "#FF6B6B",
+          "description": "Post failed - needs retry"
+        }
+      ]
+    }
+  },
+
+  "recommended_initial_setup": {
+    "enabled_platforms": ["Facebook", "LinkedIn", "X (Twitter)"],
+    "enabled_categories": ["Platform Features", "Behind the Science", "NGSS Standards", "Teacher Stories"],
+    "default_post_types": ["Blog Announcement", "Weekly Tip"],
+    "note": "Start with 3 platforms and expand based on engagement data"
+  }
+}
