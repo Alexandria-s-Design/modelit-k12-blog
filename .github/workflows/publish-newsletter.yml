@@ -1,0 +1,52 @@
+name: Publish Weekly Newsletter
+
+on:
+  schedule:
+    # Runs every Sunday at 9:00 AM EST (14:00 UTC)
+    - cron: '0 14 * * 0'
+  workflow_dispatch:  # Allows manual triggering for testing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish next newsletter
+        run: |
+          # Find the next draft to publish (lowest week number)
+          NEXT_DRAFT=$(ls drafts/week*.md | sort | head -n 1)
+
+          if [ -z "$NEXT_DRAFT" ]; then
+            echo "No more drafts to publish!"
+            exit 0
+          fi
+
+          # Get current date in YYYY-MM-DD format
+          PUBLISH_DATE=$(date +%Y-%m-%d)
+
+          # Extract the filename without path
+          DRAFT_FILENAME=$(basename "$NEXT_DRAFT")
+
+          # Extract the title part (everything after "weekX-")
+          TITLE_PART=$(echo "$DRAFT_FILENAME" | sed 's/week[0-9]*-//')
+
+          # Create new filename with date
+          NEW_FILENAME="${PUBLISH_DATE}-${TITLE_PART}"
+
+          # Move the draft to _posts with new filename
+          mv "$NEXT_DRAFT" "_posts/$NEW_FILENAME"
+
+          echo "Published: $NEXT_DRAFT → _posts/$NEW_FILENAME"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Publish weekly newsletter: $(date +%Y-%m-%d)" || exit 0
+          git push
