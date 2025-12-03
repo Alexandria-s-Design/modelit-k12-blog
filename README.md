@@ -77,3 +77,11 @@ Theme and code: MIT License
 ---
 
 Built with ❤️ for educators worldwide
+
+## Status
+Active
+
+## TODO
+- [ ] Update with latest content
+- [ ] Optimize asset organization
+- [ ] Add metadata documentation
