@@ -1,0 +1,75 @@
+---
+layout: default
+title: Post Archive
+---
+<section class="archive-page">
+    <div class="container">
+        <!-- Archive Header -->
+        <div class="archive-header" style="text-align: center; margin-bottom: 50px;">
+            <h1 style="font-size: 3em; color: #030C3C; margin-bottom: 15px; font-weight: 600;">Post Archive</h1>
+            <p style="font-size: 1.2em; color: #666; max-width: 600px; margin: 0 auto;">
+                Browse all newsletters organized by topic
+            </p>
+        </div>
+
+        {% assign categories = site.posts | map: "category" | uniq | sort %}
+
+        {% for category in categories %}
+        <div class="category-section" style="margin-bottom: 50px;">
+            <h2 style="font-size: 1.8em; color: #030C3C; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 3px solid #0F6ACE;">
+                {{ category }}
+            </h2>
+            <div class="archive-list">
+                {% assign category_posts = site.posts | where: "category", category %}
+                {% for post in category_posts %}
+                <article class="archive-item" style="display: flex; align-items: baseline; gap: 20px; padding: 15px 0; border-bottom: 1px solid #f0f5fb;">
+                    <span class="archive-date" style="color: #999; font-size: 0.9em; min-width: 100px;">
+                        {{ post.date | date: "%b %d, %Y" }}
+                    </span>
+                    <div class="archive-info" style="flex: 1;">
+                        <a href="{{ post.url | relative_url }}" style="color: #030C3C; text-decoration: none; font-size: 1.1em; font-weight: 500; transition: color 0.3s;">
+                            {{ post.title }}
+                        </a>
+                        {% if post.excerpt %}
+                        <p style="color: #777; font-size: 0.95em; margin-top: 5px; margin-bottom: 0;">
+                            {{ post.excerpt | strip_html | truncatewords: 20 }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Back to Home -->
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="{{ '/' | relative_url }}" class="color-bg-blue-0015" style="display: inline-block; padding: 15px 35px; border-radius: 30px; color: #fff; text-decoration: none; font-weight: 600; transition: all 0.3s;">
+                Back to Latest Issues
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.archive-item a:hover {
+    color: #0F6ACE !important;
+}
+
+.archive-page .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+@media (max-width: 768px) {
+    .archive-item {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+
+    .archive-date {
+        min-width: auto !important;
+    }
+}
+</style>
