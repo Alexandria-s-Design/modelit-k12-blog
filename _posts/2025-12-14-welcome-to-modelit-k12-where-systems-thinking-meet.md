@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Welcome to ModelIt! K12: Where Systems Thinking Meets Science Education"
-date: 2025-11-01 08:00:00 -0500
+date: 2025-12-14 08:00:00 -0500
 category: "Platform Spotlight"
 author: "Dr. Marie & Charles Martin"
 hero_image: "/assets/images/week1-hero.jpg"

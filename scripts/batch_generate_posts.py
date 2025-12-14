@@ -133,7 +133,7 @@ def convert_week_to_post(week_num: int, dry_run: bool = False) -> str:
     return str(output_path)
 
 def main():
-    """Generate all remaining posts (weeks 15-52)"""
+    """Generate all remaining posts (weeks 2-52)"""
     print("=" * 60)
     print("ModelIt K-12 Blog Post Generator")
     print("=" * 60)
@@ -151,13 +151,13 @@ def main():
     success = 0
     failed = 0
 
-    for week in range(15, 53):
+    for week in range(2, 53):
         try:
             output = convert_week_to_post(week)
-            print(f"✓ Week {week:2d}: {output}")
+            print(f"[OK] Week {week:2d}: {output}")
             success += 1
         except Exception as e:
-            print(f"✗ Week {week:2d}: {e}")
+            print(f"[FAIL] Week {week:2d}: {e}")
             failed += 1
 
     print()
