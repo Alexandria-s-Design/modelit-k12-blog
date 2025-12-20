@@ -30,7 +30,7 @@ layout: default
         </h2>
 
         <div class="newsletter-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
-            {% for post in site.posts limit:6 %}
+            {% for post in site.posts limit:5 %}
             <article class="newsletter-card" style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
                 {% if post.hero_image %}
                 <div class="card-image">

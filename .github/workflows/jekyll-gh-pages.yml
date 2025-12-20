@@ -3,6 +3,8 @@ name: Deploy Jekyll to GitHub Pages
 on:
   push:
     branches: ["master"]
+  schedule:
+    - cron: '0 13 * * 0'  # Every Sunday at 8 AM EST (13:00 UTC)
   workflow_dispatch:
 
 permissions:
